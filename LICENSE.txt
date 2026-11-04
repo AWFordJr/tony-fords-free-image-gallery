@@ -1,0 +1,34 @@
+Tony Ford's Free Image Gallery - License
+=========================================
+Copyright (c) Anthony W. Ford, Jr. (Tony Ford) - awfordjr@gmail.com
+All rights reserved, except for the permissions granted below.
+
+Tony Ford's Free Image Gallery is FREE for NON-COMMERCIAL use.
+
+YOU MAY
+  - Download, install and run it for personal, family, hobby, club, school,
+    church, community and other non-commercial galleries.
+  - Share the unmodified, complete package with others, free of charge,
+    with this license and all credits left exactly as they are.
+
+YOU MAY NOT
+  - Sell it, rent it, or charge anyone for it or for access to it.
+  - Use it to make a profit or run it as part of a for-profit venture.
+  - Modify, adapt, translate, or create derivative versions of the code,
+    themes, or artwork.
+  - Remove or change the footer credit, the branding, the license, or any
+    copyright notice.
+  - Claim it as your own work or take credit for it in any way.
+
+CREDIT
+  Every installation must keep this credit visible in the footer:
+    Tony Ford's Free Image Gallery by Anthony W. Ford, Jr. (Tony Ford) - awfordjr@gmail.com
+
+QUESTIONS / PERMISSION
+  If you would like to do anything not listed above, ask first:
+  Tony Ford - awfordjr@gmail.com
+
+NO WARRANTY
+  This software is provided "as is", without warranty of any kind. The author
+  is not liable for any claim, damages or other liability arising from its use.
+  You are responsible for backing up your own data.

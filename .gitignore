@@ -1,0 +1,6 @@
+config.php
+install.php.locked
+uploads/*/20*/
+*.log
+.DS_Store
+Thumbs.db

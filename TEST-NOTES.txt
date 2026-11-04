@@ -1,0 +1,26 @@
+Tony Ford's Free Image Gallery v1.0.0 - TEST NOTES
+Tested: Tue Nov 3, 2026 (America/New_York)
+Environment: PHP 8.4.24 (gd+WebP/AVIF, pdo_mysql, finfo, exif), MariaDB 11.8.6-MariaDB-0+deb13u1 from Debian, PHP built-in server (router.php), headless Chromium (Playwright) at 1440x900.
+Code is written for PHP 8.0+; only PHP 8.4.24 was executed. Apache .htaccess and nginx rules were NOT exercised on a real Apache/nginx.
+
+LINT: php -l on every .php file - no errors.
+
+INSTALLER (real MariaDB): fresh install in Single-owner and Open-registration modes; wrong DB password / user / port; unreachable host (friendly error after ~6s);
+bad DB name; short password; DB user without access; existing tables refused (erase+reinstall needs typing ERASE); successful install locks itself and
+install.php then 404s; config.php already present = "already installed"; unwritable site dir -> config shown to save by hand; unwritable uploads/ blocks install;
+missing pdo_mysql/gd/fileinfo -> friendly per-extension messages. Zero PHP Warning/Notice/Deprecated/Fatal in server logs (E_ALL).
+
+E2E (about 100 checks per mode, both modes pass 0 fail): anon access, 404s, footer credit, CSP; register/login/logout; permissions (Single: register closed,
+viewer cannot upload/edit/delete/admin but can like/comment; Open: user isolation, banned user, moderation/pending, bulk move, delete user, admin cannot delete self);
+mode switch single<->open; nested albums + breadcrumbs + loop prevention; good/bad uploads; edit/delete; search/tags; likes; comments; theme API/cookie; admin pages; login throttling.
+
+SECURITY: SQLi-style params, XSS in title/tags/description/comments/bio/search/theme cookie, CSRF on all state changes (HTTP 419), open-redirect on login next=, path traversal,
+direct access to config/inc/pages/tools, session id regeneration + strict mode, comment IDOR, upload exploits (PHP-as-PNG, SVG, empty, oversize, huge pixel dimensions,
+double extension, wrong content-type, JPEG with PHP in comment, GIF with appended PHP) - no payload ever reaches disk.
+
+BUGS FOUND AND FIXED: admin "create user" always said "User not found"; Toxic Rain negative-radius canvas error; GIF polyglot was stored byte-for-byte (now rejected);
+PDO connect timeouts; router.php exposed dot-files/php under php -S; seeder crashes; Referer-based redirect in admin images removed.
+
+BROWSER: all 10 themes x 7 pages: 0 console errors/page errors/failed requests. Lightbox, slideshow, theme picker, login and admin pages checked (Toxic Rain run: clean).
+Not run: a repeat of the full 10-theme lightbox/admin sweep (stopped to save time) - only Toxic Rain was swept for those interactions.
+Screenshots: screenshots/ (10 theme homepages, lightbox, theme picker, upload, admin dashboard, admin themes, installer).

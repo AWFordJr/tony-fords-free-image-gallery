@@ -2,7 +2,7 @@
 
 **A free, self-hosted image gallery in PHP + MySQL/MariaDB.** Share your pictures as the only poster (**Single owner**) or let everybody sign up and share (**Open registration**) - you choose in the installer and can change it any time in *Admin → Settings*.
 
-by **Anthony W. Ford, Jr. (Tony Ford)** - awfordjr@gmail.com · Free for **non-commercial** use (see [License](#license)).
+by **Anthony W. Ford, Jr. (Tony Ford)** - awfordjr@gmail.com · [TonyFord.us](https://tonyford.us) · Free for **non-commercial** use (see [License](#license)).
 
 ![Toxic Rain theme](screenshots/home-toxic-rain.png)
 
@@ -67,4 +67,4 @@ Quick local try: `php -S 127.0.0.1:8080 router.php` then open `/install.php`.
 Free for **non-commercial** use only. No selling, no profit, **no modifications**, no taking credit - keep the footer credit and credit **Tony Ford (awfordjr@gmail.com)**. Full text: [LICENSE.txt](LICENSE.txt).
 
 ---
-Tony Ford's Free Image Gallery by Anthony W. Ford, Jr. (Tony Ford) - awfordjr@gmail.com
+Tony Ford's Free Image Gallery by Anthony W. Ford, Jr. (Tony Ford) - awfordjr@gmail.com · TonyFord.us

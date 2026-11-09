@@ -4,6 +4,8 @@
 
 by **Anthony W. Ford, Jr. (Tony Ford)** - awfordjr@gmail.com · [TonyFord.us](https://tonyford.us) · Free for **non-commercial** use (see [License](#license)).
 
+🌐 More of Tony's free content: [TonyFord.vip](https://tonyford.vip)
+
 ![Toxic Rain theme](screenshots/home-toxic-rain.png)
 
 ## Features

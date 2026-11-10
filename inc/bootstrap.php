@@ -14,7 +14,7 @@ if (PHP_VERSION_ID < 80000) {
 error_reporting(E_ALL);
 ini_set('display_errors', '0');
 
-define('TFG_VERSION', '1.0.0');
+define('TFG_VERSION', '1.0.1');
 define('ROOT', dirname(__DIR__));
 define('UPLOAD_DIR', ROOT . '/uploads');
 define('TFG_CREDIT', "Tony Ford's Free Image Gallery by Anthony W. Ford, Jr. (Tony Ford) - awfordjr@gmail.com");

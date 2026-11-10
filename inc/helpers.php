@@ -69,6 +69,15 @@ function e($v): string
     return htmlspecialchars((string)$v, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
+/** Visible credit with Tony's email and sites. The legal wording stays in TFG_CREDIT. */
+function credit_html(): string
+{
+    return e("Tony Ford's Free Image Gallery by Anthony W. Ford, Jr. (Tony Ford)")
+        . ' - <a href="mailto:awfordjr@gmail.com">awfordjr@gmail.com</a>'
+        . ' · <a href="https://TonyFord.us" rel="noopener noreferrer">TonyFord.us</a>'
+        . ' · <a href="https://TonyFord.vip" rel="noopener noreferrer">TonyFord.vip</a>';
+}
+
 function json_out(array $data, int $code = 200): never
 {
     http_response_code($code);

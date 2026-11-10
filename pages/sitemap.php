@@ -5,6 +5,7 @@ $out = fn(string $loc, ?string $mod = null) => print('<url><loc>' . htmlspecialc
 $out(abs_url(''));
 $out(abs_url('categories'));
 $out(abs_url('popular'));
+$out(abs_url('about'));
 foreach (categories_all() as $c) $out(abs_url('category/' . $c['slug']));
 foreach (q_all("SELECT id, slug, created_at FROM images WHERE status = 'published' ORDER BY id DESC LIMIT 5000") as $r) {
     $out(abs_url('image/' . $r['id'] . ($r['slug'] !== '' ? '-' . $r['slug'] : '')), $r['created_at']);

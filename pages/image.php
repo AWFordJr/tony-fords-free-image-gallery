@@ -90,7 +90,9 @@ if ($img['status'] !== 'published') $noindex = true;
 <?= breadcrumbs($crumbs) ?>
 <article class="viewer">
   <div class="viewer-main">
-    <div class="viewer-stage" style="--c:<?= e($img['color']) ?>">
+    <div class="viewer-stage" style="--c:<?= e($img['color']) ?>"
+         <?php if ($older): ?>data-prev-full="<?= e(display_url($older)) ?>"<?php endif; ?>
+         <?php if ($newer): ?>data-next-full="<?= e(display_url($newer)) ?>"<?php endif; ?>>
       <?php if ($older): ?><a class="vnav prev" href="<?= e(image_url($older)) ?>" rel="prev" title="Older: <?= e($older['title']) ?>">‹</a><?php endif; ?>
       <a href="<?= e(display_url($img)) ?>" class="g-link single" data-id="<?= (int)$img['id'] ?>" data-full="<?= e(display_url($img)) ?>" data-title="<?= e($img['title']) ?>" data-w="<?= (int)$img['width'] ?>" data-h="<?= (int)$img['height'] ?>" data-likes="<?= (int)$img['likes_count'] ?>" data-liked="<?= $liked ? 1 : 0 ?>" data-url="<?= e($selfUrl) ?>" title="Click to view fullscreen">
         <img src="<?= e(display_url($img)) ?>" width="<?= (int)$img['width'] ?>" height="<?= (int)$img['height'] ?>" alt="<?= e($img['title']) ?>" decoding="async">

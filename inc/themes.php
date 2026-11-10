@@ -41,6 +41,15 @@ function active_theme(): string
     return site_theme();
 }
 
+/** True when this visitor already picked a theme (account or cookie). */
+function visitor_chose_theme(): bool
+{
+    if (setting('allow_visitor_themes', '1') !== '1') return false;
+    $u = current_user();
+    if ($u && valid_theme($u['theme'] ?? null)) return true;
+    return valid_theme($_COOKIE['tfg_theme'] ?? null);
+}
+
 /** Theme picker with live previews. $name = form field name, $current = selected id. */
 function theme_picker(string $current, string $mode = 'form', string $name = 'theme'): string
 {

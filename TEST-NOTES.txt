@@ -1,26 +1,97 @@
-Tony Ford's Free Image Gallery v1.0.0 - TEST NOTES
-Tested: Tue Nov 3, 2026 (America/New_York)
-Environment: PHP 8.4.24 (gd+WebP/AVIF, pdo_mysql, finfo, exif), MariaDB 11.8.6-MariaDB-0+deb13u1 from Debian, PHP built-in server (router.php), headless Chromium (Playwright) at 1440x900.
-Code is written for PHP 8.0+; only PHP 8.4.24 was executed. Apache .htaccess and nginx rules were NOT exercised on a real Apache/nginx.
+Tony Ford's Free Image Gallery v1.0.1 - TEST NOTES
+Tested: Tue Nov 10, 2026 (America/New_York)
+Tester: Kitty (retest of Synci's v1.0.1 tree, plus two small changes below)
+Environment: PHP 8.4.27 (cli; gd+WebP, pdo_mysql, fileinfo, exif, mbstring),
+MariaDB 11.8.6, PHP built-in server (php -S 127.0.0.1:8091 router.php),
+headless Chromium (Playwright + /usr/bin/google-chrome) at 1440x900.
+Code is written for PHP 8.0+; only PHP 8.4.27 was executed. Apache .htaccess
+and nginx rules were NOT exercised on a real Apache/nginx.
 
-LINT: php -l on every .php file - no errors.
+CHANGES IN THIS BUILD (beyond Synci's v1.0.1 draft)
+----------------------------------------------------
+1) The on-device helper AI no longer shows a "Continue in [album]" hint.
+   She still remembers the last album in localStorage (tfg_helper_last_category)
+   and still does silent density/theme/preload adaptations. No hint markup
+   remains on Home or Albums.
+2) The Team's Ideas on /about now credits:
+     Kitty  — all 10 themes (Toxic Rain, Matrix, Dragon's Lair, Midnight
+              Starfield, Ember Glow, Frozen Snowfall, Neon Synthwave,
+              Ocean Depths, Classic Light, Classic Dark) plus the overall
+              gallery design and script
+     Tony   — Single owner and Open registration modes, subcategories
+              (sub-albums), and the gallery branding
+     Synci  — the About page and the on-device helper AI (auto grid density
+              and starting theme, silent last-album memory, smart preload)
+README.md and README.txt changelogs were updated to match.
 
-INSTALLER (real MariaDB): fresh install in Single-owner and Open-registration modes; wrong DB password / user / port; unreachable host (friendly error after ~6s);
-bad DB name; short password; DB user without access; existing tables refused (erase+reinstall needs typing ERASE); successful install locks itself and
-install.php then 404s; config.php already present = "already installed"; unwritable site dir -> config shown to save by hand; unwritable uploads/ blocks install;
-missing pdo_mysql/gd/fileinfo -> friendly per-extension messages. Zero PHP Warning/Notice/Deprecated/Fatal in server logs (E_ALL).
+LINT
+----
+php -l on every .php file (40 files) — no syntax errors.
 
-E2E (about 100 checks per mode, both modes pass 0 fail): anon access, 404s, footer credit, CSP; register/login/logout; permissions (Single: register closed,
-viewer cannot upload/edit/delete/admin but can like/comment; Open: user isolation, banned user, moderation/pending, bulk move, delete user, admin cannot delete self);
-mode switch single<->open; nested albums + breadcrumbs + loop prevention; good/bad uploads; edit/delete; search/tags; likes; comments; theme API/cookie; admin pages; login throttling.
+INSTALLER (fresh MariaDB, both modes)
+-------------------------------------
+Fresh install against local MariaDB in Single-owner mode (tfg101_single) and
+again, after restoring a clean tree, in Open-registration mode (tfg101_open).
+Each install wrote config.php, locked itself (install.php.locked), and showed
+"Installed! Welcome, tony" with version 1.0.1 and awfordjr@gmail.com,
+TonyFord.us, and TonyFord.vip in the footer. No PHP Warning / Notice /
+Deprecated / Fatal in the PHP error log or the built-in server log (E_ALL,
+display_errors off, log inspected; error log was empty).
 
-SECURITY: SQLi-style params, XSS in title/tags/description/comments/bio/search/theme cookie, CSRF on all state changes (HTTP 419), open-redirect on login next=, path traversal,
-direct access to config/inc/pages/tools, session id regeneration + strict mode, comment IDOR, upload exploits (PHP-as-PNG, SVG, empty, oversize, huge pixel dimensions,
-double extension, wrong content-type, JPEG with PHP in comment, GIF with appended PHP) - no payload ever reaches disk.
+FUNCTIONAL CHECKS (both modes unless noted)
+-------------------------------------------
+- Admin login succeeded after each install.
+- Created a top-level Nature album and a Flowers subcategory under it.
+- Uploaded a generated 800x500 PNG ("Tony Ford Sample 1.0.1", tags sample /
+  test / v101) via POST /api/upload. Response ok, id 1, published. The
+  picture appeared on Home, on the Flowers album, and on its own image page
+  (title, 800x500).
+- /about: heading "Made by Humans & AI Together", scrollable The Team's
+  Ideas (scrollHeight 938 > clientHeight 218), all 10 themes credited to
+  Kitty, Tony's three credits, Synci's About page and helper AI credits,
+  all 14 sisters, email + TonyFord.us + TonyFord.vip, version 1.0.1.
+- Footer credits and v1.0.1 on Home, Albums, About, Nature, Flowers, and
+  the sample image page.
+- Single-owner: registration is not open (logged-in admin is redirected;
+  the form is not offered to the public as an open signup).
+- Open-registration: anonymous /register shows the form; a new user
+  (guestuser) registered and could open the upload page.
 
-BUGS FOUND AND FIXED: admin "create user" always said "User not found"; Toxic Rain negative-radius canvas error; GIF polyglot was stored byte-for-byte (now rejected);
-PDO connect timeouts; router.php exposed dot-files/php under php -S; seeder crashes; Referer-based redirect in admin images removed.
+HELPER AI
+---------
+After a first visit: tfg_helper_theme=classic-light, tfg_helper_density=cozy
+(this Chrome session preferred a light color scheme and a fine pointer on a
+1440x900 desktop). After opening the Flowers album, tfg_helper_last_category
+was set to Flowers, and it persisted on Home. Home and Albums showed no
+"Continue in …" text and contained no data-tfg-continue markup. Preload
+links (rel=preload, as=image, data-tfg-helper-preload) appeared on a gallery
+page (1 link for the sample). The sample image page correctly added none
+(it is the only picture in its album, so it has no neighbors).
 
-BROWSER: all 10 themes x 7 pages: 0 console errors/page errors/failed requests. Lightbox, slideshow, theme picker, login and admin pages checked (Toxic Rain run: clean).
-Not run: a repeat of the full 10-theme lightbox/admin sweep (stopped to save time) - only Toxic Rain was swept for those interactions.
-Screenshots: screenshots/ (10 theme homepages, lightbox, theme picker, upload, admin dashboard, admin themes, installer).
+BROWSER (headless Chromium)
+---------------------------
+Zero console errors, zero page errors, and zero failed non-favicon requests
+on Home, Albums, About, Nature, Flowers, and the sample image page, in both
+modes. Toxic Rain and Matrix were applied on Home (data-theme matched; no
+console or page errors). About was also loaded under Matrix. No PHP
+warnings appeared in the server logs during the browser pass.
+
+NOTES
+-----
+On php -S the installer sets pretty_urls to 0 (existing installer behavior
+for the built-in server). Pretty paths still work when requested through
+router.php; generated links use /index.php?r=… form (e.g.
+/index.php?r=image%2F1-tony-ford-sample-1-0-1). Apache/nginx installs should
+still get pretty URLs when the installer allows them.
+
+This retest did not repeat the full v1.0.0 ~100-check security sweep
+(SQLi/XSS/CSRF/upload exploits, login throttling, etc.). Those passed on
+v1.0.0; this pass focused on the v1.0.1 changes and a fresh install /
+login / upload / albums / About / footer / version / helper / theme check
+in both gallery modes, with zero PHP warnings and zero Chromium console
+errors.
+
+After these tests, config.php, the locked installer, and the test uploads
+were removed from the tree, and install.php was put back, so v1.0.1 can be
+installed fresh. The local test databases were left on the box and are not
+part of this package.

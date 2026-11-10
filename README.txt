@@ -1,5 +1,7 @@
 TONY FORD'S FREE IMAGE GALLERY
 by Anthony W. Ford, Jr. (Tony Ford) - awfordjr@gmail.com
+TonyFord.us  ·  TonyFord.vip
+Version 1.0.1
 Free for non-commercial use. See LICENSE.txt.
 ==========================================================
 
@@ -56,6 +58,28 @@ FEATURES
   management - 10 themes (Toxic Rain, Matrix, Dragon's Lair, Midnight Starfield, Ember Glow,
   Frozen Snowfall, Neon Synthwave, Ocean Depths, Classic Light, Classic Dark) with
   animated effects that can be switched off, and visitors can pick their own theme.
+  About page ("Made by Humans & AI Together") with a scrollable Team's Ideas list.
+
+HELPER AI
+  A small helper runs in the visitor's browser. She is rule- and stat-based (no
+  machine learning). She stays on-device, collects nothing, and sends nothing
+  anywhere. The only memory she uses is localStorage on that visitor's device.
+  She picks a comfortable grid density and a starting theme from the screen and
+  device, never overrides a choice the visitor already made, remembers the last
+  album they opened silently (no on-screen hint), and may preload a few nearby
+  pictures (only when Save-Data
+  is off, and only a small number). Visitors cannot turn her off; she is
+  described on the About page.
+
+CHANGELOG
+  1.0.1 (November 10, 2026) - About page with The Team's Ideas (all 10 themes
+  plus the overall gallery design and script credited to Kitty; Single owner /
+  Open registration, subcategories, and branding credited to Tony; the About
+  page and helper AI credited to Synci); on-device helper AI that works
+  silently (last album remembered with no visible hint); TonyFord.us and
+  TonyFord.vip in the footer and About credits.
+  1.0.0 - First public release.
+
 
 SECURITY
   Prepared statements everywhere, password hashing, CSRF tokens, session
@@ -64,4 +88,4 @@ SECURITY
   names, and stored where scripts cannot run.
 
 HELP
-  Tony Ford - awfordjr@gmail.com
+  Tony Ford - awfordjr@gmail.com · https://TonyFord.us · https://TonyFord.vip

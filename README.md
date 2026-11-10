@@ -2,9 +2,7 @@
 
 **A free, self-hosted image gallery in PHP + MySQL/MariaDB.** Share your pictures as the only poster (**Single owner**) or let everybody sign up and share (**Open registration**) - you choose in the installer and can change it any time in *Admin → Settings*.
 
-by **Anthony W. Ford, Jr. (Tony Ford)** - awfordjr@gmail.com · [TonyFord.us](https://tonyford.us) · Free for **non-commercial** use (see [License](#license)).
-
-🌐 More of Tony's free content: [TonyFord.vip](https://tonyford.vip)
+by **Anthony W. Ford, Jr. (Tony Ford)** - awfordjr@gmail.com · [TonyFord.us](https://TonyFord.us) · [TonyFord.vip](https://TonyFord.vip) · Free for **non-commercial** use (see [License](#license)).
 
 ![Toxic Rain theme](screenshots/home-toxic-rain.png)
 
@@ -18,6 +16,8 @@ by **Anthony W. Ford, Jr. (Tony Ford)** - awfordjr@gmail.com · [TonyFord.us](ht
 - **10 themes** with animated effects (reduced-motion aware, pause when the tab is hidden, on/off toggle), selectable by admin and per visitor
 - Light/dark toggle, responsive layout
 - Tony's branding: selfie avatar/logo + favicon, footer credit
+- About page: **Made by Humans & AI Together**, with a scrollable **The Team's Ideas** list
+- A small on-device helper AI (see below)
 
 ## Install (5 steps)
 Requirements: PHP 8.0+ (8.2+ recommended) with `pdo_mysql`, `gd`, `fileinfo` (`exif` and GD WebP optional), MySQL 5.7+/MariaDB 10.3+, Apache (or nginx).
@@ -65,8 +65,17 @@ PDO prepared statements everywhere · `password_hash` · CSRF tokens on every PO
 
 Quick local try: `php -S 127.0.0.1:8080 router.php` then open `/install.php`.
 
+## Helper AI
+A small helper runs in the visitor's browser. She is rule- and stat-based (no machine learning). She stays on-device, collects nothing, and sends nothing anywhere. The only memory she uses is `localStorage` on that visitor's device.
+
+She quietly picks a comfortable grid density and a starting theme from screen size, device pixel ratio, pointer type, and `prefers-color-scheme` / `prefers-reduced-motion`. She never overrides a theme or layout the visitor has already chosen. She remembers the last album they opened silently (no on-screen hint), and she may preload a few nearby pictures (a small cap, and never on a Save-Data connection). Visitors cannot turn her off; she is described openly on the About page.
+
+## Changelog
+- **1.0.1** (November 10, 2026) — About page “Made by Humans & AI Together” with The Team’s Ideas (all 10 themes plus the overall gallery design and script credited to Kitty; Single owner / Open registration, subcategories, and branding credited to Tony; the About page and helper AI credited to Synci); on-device helper AI that works silently (grid density, starting theme, last album remembered with no visible hint, smart preload); TonyFord.us and TonyFord.vip added next to awfordjr@gmail.com in the footer and About credits.
+- **1.0.0** — First public release.
+
 ## License
 Free for **non-commercial** use only. No selling, no profit, **no modifications**, no taking credit - keep the footer credit and credit **Tony Ford (awfordjr@gmail.com)**. Full text: [LICENSE.txt](LICENSE.txt).
 
 ---
-Tony Ford's Free Image Gallery by Anthony W. Ford, Jr. (Tony Ford) - awfordjr@gmail.com · TonyFord.us
+Tony Ford's Free Image Gallery by Anthony W. Ford, Jr. (Tony Ford) - awfordjr@gmail.com · TonyFord.us · TonyFord.vip

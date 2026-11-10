@@ -18,7 +18,7 @@ $canonical = abs_url('category/' . $cat['slug'], $p['page'] > 1 ? ['page' => $p[
 if ($images) $ogImage = (is_https() ? 'https' : 'http') . '://' . preg_replace('/[^A-Za-z0-9.\-:\[\]]/', '', (string)($_SERVER['HTTP_HOST'] ?? 'localhost')) . thumb_url($images[0]);
 ?>
 <?= breadcrumbs($crumbs) ?>
-<header class="cat-head">
+<header class="cat-head" data-tfg-category="<?= e($cat['slug']) ?>" data-tfg-category-name="<?= e($cat['name']) ?>" data-tfg-category-href="<?= e(category_url($cat)) ?>">
   <h1 class="page-title"><?= e($cat['name']) ?></h1>
   <?php if ($cat['description'] !== ''): ?><p class="muted"><?= e($cat['description']) ?></p><?php endif; ?>
   <p class="muted small"><?= number_format($total) ?> picture<?= $total === 1 ? '' : 's' ?><?= count($ids) > 1 ? ' (including sub-albums)' : '' ?>

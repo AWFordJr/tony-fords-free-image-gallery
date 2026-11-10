@@ -31,7 +31,7 @@ function inst_page(string $title, string $body, string $bodyClass = ''): never
         . '<header class="install-head"><img src="' . e($b) . '/assets/img/logo-128.png" alt="Tony Ford" width="84" height="84">'
         . '<div><h1>Tony Ford\'s Free Image Gallery</h1><p class="muted">Installer &middot; version ' . e(TFG_VERSION) . '</p></div></header>'
         . $body
-        . '<footer class="install-foot muted">' . e(TFG_CREDIT) . '</footer></div></body></html>';
+        . '<footer class="install-foot muted">' . credit_html() . '</footer></div></body></html>';
     exit;
 }
 

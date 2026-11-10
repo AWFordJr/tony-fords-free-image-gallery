@@ -16,6 +16,7 @@ $nav = [
     ['categories', 'Albums', 'categories'],
     ['popular', 'Popular', 'popular'],
     ['tags', 'Tags', 'tags'],
+    ['about', 'About', 'about'],
     ['favorites', 'Favorites', 'favorites'],
 ];
 ?><!doctype html>
@@ -44,6 +45,7 @@ $nav = [
       data-pretty="<?= e(setting('pretty_urls', '1')) ?>"
       data-fx-default="<?= e($fxDefault) ?>" data-slide="<?= (int)setting('slideshow_seconds', '4') ?>"
       data-allow-themes="<?= e(setting('allow_visitor_themes', '1')) ?>" data-site-theme="<?= e(site_theme()) ?>"
+      data-theme-chosen="<?= visitor_chose_theme() ? '1' : '0' ?>"
       data-logged="<?= $u ? '1' : '0' ?>" data-layout="<?= e(setting('layout', 'justified')) ?>"
       data-download="<?= e(setting('allow_download', '1')) ?>">
 <canvas id="fx" aria-hidden="true"></canvas>
@@ -100,8 +102,8 @@ $nav = [
 <footer class="site-footer">
   <div class="foot-in">
     <img src="<?= e(asset('img/logo-64.png')) ?>" alt="" width="40" height="40" loading="lazy">
-    <p class="credit"><?= e(TFG_CREDIT) ?></p>
-    <p class="muted small">Free for non-commercial use. v<?= e(TFG_VERSION) ?></p>
+    <p class="credit"><?= credit_html() ?></p>
+    <p class="muted small"><a href="<?= e(url('about')) ?>">About</a> · Free for non-commercial use. v<?= e(TFG_VERSION) ?></p>
   </div>
 </footer>
 
@@ -132,6 +134,7 @@ $nav = [
 </div>
 
 <script src="<?= e(asset('js/app.js')) ?>" defer></script>
+<script src="<?= e(asset('js/helper.js')) ?>" defer></script>
 <script src="<?= e(asset('js/effects.js')) ?>" defer></script>
 <script src="<?= e(asset('js/lightbox.js')) ?>" defer></script>
 <?php if ($__page === 'upload'): ?><script src="<?= e(asset('js/upload.js')) ?>" defer></script><?php endif; ?>

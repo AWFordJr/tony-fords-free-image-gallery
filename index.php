@@ -37,6 +37,8 @@ switch ($first) {
         view('tag', ['slug' => $arg]);
     case 'search':
         view('search');
+    case 'about':
+        view('about');
     case 'popular':
         view('popular');
     case 'favorites':
